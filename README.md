@@ -10,7 +10,6 @@ pip install -e .
 
 
 ## data to plotjuggler
-创建实例
 ```python
 from data_vis import PlotJugglerUDP
 
