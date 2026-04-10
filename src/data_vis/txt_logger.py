@@ -6,8 +6,7 @@ import torch
 class TxtLogger:
     def __init__(self, base_dir=None, enable=True):
         if base_dir is None:
-            cur_dir = os.path.dirname(os.path.abspath(__file__))
-            base_dir = os.path.join(cur_dir, "data_txt")
+            base_dir = os.path.join(os.getcwd(), "data_txt")
 
         self.base_dir = base_dir
         self.enable = enable
@@ -34,7 +33,7 @@ class TxtLogger:
             raise TypeError(f"Unsupported data type: {type(x)}")
         return x
 
-    def log_tensor(self, name: str, x, batch_idx=0, flatten=True, fmt="%.6f"):
+    def log_data(self, name: str, x, batch_idx=0, flatten=True, fmt="%.6f"):
         if not self.enable:
             return
 
