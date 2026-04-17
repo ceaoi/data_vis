@@ -61,3 +61,17 @@ class PlotJugglerUDP:
                 data[f"{name}/{i}"] = float(v)
 
         self.send_dict(data, add_timestamp=add_timestamp)
+
+    def send_data(self, name, x, add_timestamp=True):
+        if isinstance(x, dict):
+            # dict 情况下，通常不需要 name，直接发送
+            self.send_dict(x, add_timestamp=add_timestamp)
+        elif isinstance(x, torch.Tensor):
+            self.send_tensor(name, x, add_timestamp=add_timestamp)
+        elif isinstance(x, (np.ndarray, list, tuple, int, float, np.number)):
+            self.send_array(name, x, add_timestamp=add_timestamp)
+        else:
+            raise TypeError(
+                f"Unsupported type for send_data: {type(x)}. "
+                f"Expected dict, torch.Tensor, numpy array, list, tuple, int, or float."
+            )
