@@ -18,6 +18,10 @@ plotjuggler = PlotJugglerUDP(host="127.0.0.1", port=5005)
 plotjuggler.send_dict({"step": i, "loss": 1.0 / (i + 1)})
 plotjuggler.send_tensor("feat", torch.tensor([i, i * 2.0, i * 3.0]))
 plotjuggler.send_array("arr", np.array([i, i + 0.5, i + 1.0], dtype=np.float32))
+
+plotjuggler.send_data("data_name", {"step": i, "loss": 1.0 / (i + 1)})
+plotjuggler.send_data("feat", torch.tensor([i, i * 2.0, i * 3.0]))
+plotjuggler.send_data("arr", np.array([i, i + 0.5, i + 1.0], dtype=np.float32))
 ```
 
 ## data to txt
